@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const shortid = require('shortid');
 
-const Url = require('../models/Url');
+const Url = require('../models/url');
 
 router.post("/", async (req, res)=>{
     const urlCode = shortid.generate();
@@ -15,7 +15,7 @@ router.post("/", async (req, res)=>{
         if (url) {
           return res.json(url);
         } else {
-          const shortUrl = "http://localhost:2345/short" + '/' + urlCode;
+          const shortUrl = "http://alturl.herokuapp.com/short" + '/' + urlCode;
   
           url = new Url({
             longUrl,
