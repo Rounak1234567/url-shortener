@@ -6,6 +6,7 @@ const connect = require("./config/db")
 
 app.use(express.json());
 
+app.use("/short", require("./routes/urlShortener"))
 
 app.listen(port, (req,res)=>{
     connect()
