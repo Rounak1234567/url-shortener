@@ -1,13 +1,23 @@
-const { Router } = require("express");
+
 const express = require("express");
 const router = express.Router();
 const shortid = require('shortid');
+var validate = require('url-validator12'); 
 
 const Url = require('../models/url');
 
 router.post("/", async (req, res)=>{
     const urlCode = shortid.generate();
     const { longUrl } = req.body;
+
+    let isValid = validate.verify(longUrl);
+
+    if(!isValid){
+      return res.status(401).json({
+        success:false,
+        message:"URL is not"
+      })
+    }
 
     try {
         let url = await Url.findOne({ longUrl });
