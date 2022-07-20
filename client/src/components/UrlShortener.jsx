@@ -19,6 +19,7 @@ const UrlShortener = ()=>{
             }
             const res = await axios.post("https://alturl.herokuapp.com/short", payload);
             setShortUrl(res.data.shortUrl)
+            setErr(false)
             
         } catch (error) {
             setShortUrl(error.response.data.message)
