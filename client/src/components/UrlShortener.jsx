@@ -6,15 +6,24 @@ const UrlShortener = ()=>{
 
     const [text, setText] = useState("")
     const [shortUrl, setShortUrl] = useState("")
+    const [err, setErr] = useState(false)
 
 
 
     const handleShort = async ()=>{
-        const payload = {
-            longUrl:text
+
+        try {
+
+            const payload = {
+                longUrl:text
+            }
+            const res = await axios.post("https://alturl.herokuapp.com/short", payload);
+            setShortUrl(res.data.shortUrl)
+            
+        } catch (error) {
+            setShortUrl(error.response.data.message)
+            setErr(true)
         }
-        const res = await axios.post("https://alturl.herokuapp.com/short", payload);
-        setShortUrl(res.data.shortUrl)
     }
 
     return(
@@ -30,11 +39,25 @@ const UrlShortener = ()=>{
 
             {
                 shortUrl!=="" && <div>
-                    <h2>Your Shornened URL is : </h2>
+                    {
+                        err ? 
+                        <h2>Something wrong in your URL</h2>
+                        :
+                        <h2>Your Shornened URL is : </h2>
+                    }
+                    
                     <h2>{shortUrl}</h2>
-                    <CopyToClipboard text={shortUrl}> 
-                        <button>Copy to Clipboard</button>
-                    </CopyToClipboard>
+
+                    {
+                        err ? 
+                        null 
+                        : 
+                        <CopyToClipboard text={shortUrl}> 
+                            <button>Copy to Clipboard</button>
+                        </CopyToClipboard>
+                    }
+
+                    
                 </div>
             }
 

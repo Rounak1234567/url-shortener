@@ -15,7 +15,7 @@ router.post("/", async (req, res)=>{
     if(!isValid){
       return res.status(401).json({
         success:false,
-        message:"URL is not"
+        message:"Please provide a valid URL"
       })
     }
 
@@ -40,7 +40,10 @@ router.post("/", async (req, res)=>{
         }
     }catch (err) {
         console.error(err);
-        res.status(500).json('Server error');
+        res.status(500).json({
+          success:false,
+          message:"Something went wrong"
+        });
     }
 })
 
