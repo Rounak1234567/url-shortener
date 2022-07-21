@@ -1,6 +1,13 @@
 import { useState } from "react"
 import axios from "axios"
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { ChakraProvider } from '@chakra-ui/react'
+import { Input } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
+import { Link } from '@chakra-ui/react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const UrlShortener = ()=>{
 
@@ -28,33 +35,45 @@ const UrlShortener = ()=>{
     }
 
     return(
+        <ChakraProvider>
         <div>
-            <h1>URL Shortner</h1>
-            <input type="text" placeholder="Enter Your URL"
-            onChange={(e)=>setText(e.target.value)}
-            style={{width:"80%"}}
-            />
             <br /><br />
-            <button onClick={handleShort}>Shorten</button>
+            <Heading>URL Shortner</Heading>
+            <br /><br />
+            <Input variant='filled' placeholder='Enter Your URL' focusBorderColor='lime' onChange={(e)=>setText(e.target.value)} maxW="70%"/>
+            
+            <br /><br />
+            <Button onClick={handleShort} colorScheme='blue'>Shorten</Button>
+            <br /><br />
 
 
             {
                 shortUrl!=="" && <div>
                     {
                         err ? 
-                        <h2>Something wrong in your URL</h2>
+                        <div>
+                            <Text fontSize='3xl'>{shortUrl}</Text>
+                        </div>
+                        
+
                         :
-                        <h2>Your Shornened URL is : </h2>
+                        <div>
+                            <Text fontSize='3xl'>Your Shornened URL is : </Text>
+                            <Link href={shortUrl} isExternal>
+                                {shortUrl}<ExternalLinkIcon mx='2px' />
+                            </Link>
+                    <br /><br /> 
+                        </div>
+                        
                     }
                     
-                    <h2>{shortUrl}</h2>
-
+                     
                     {
                         err ? 
                         null 
                         : 
                         <CopyToClipboard text={shortUrl}> 
-                            <button>Copy to Clipboard</button>
+                            <Button colorScheme='blue'>Copy Link to Clipboard</Button>
                         </CopyToClipboard>
                     }
 
@@ -63,6 +82,7 @@ const UrlShortener = ()=>{
             }
 
         </div>
+        </ChakraProvider>
     )
 }
 
