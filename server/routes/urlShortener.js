@@ -25,7 +25,7 @@ router.post("/", async (req, res)=>{
         if (url) {
           return res.json(url);
         } else {
-          const shortUrl = "https://urlshortner-cv4s.onrender.com/short" + '/' + urlCode;
+          const shortUrl = "https://urlshortner-cv4s.onrender.com/" + urlCode;
   
           url = new Url({
             longUrl,

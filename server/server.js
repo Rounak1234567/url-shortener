@@ -9,10 +9,10 @@ app.use(cors())
 app.use(express.json());
 app.options('*', cors())
 
-app.get("/", (req, res)=>{
+app.get("/test", (req, res)=>{
     return res.send("Hello");
 })
-app.use("/short", require("./routes/urlShortener"))
+app.use("/", require("./routes/urlShortener"))
 
 
 app.listen(port, (req,res)=>{
