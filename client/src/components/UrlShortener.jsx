@@ -24,7 +24,7 @@ const UrlShortener = ()=>{
             const payload = {
                 longUrl:text
             }
-            const res = await axios.post("https://alturl.herokuapp.com/short", payload);
+            const res = await axios.post("https://urlshortner-cv4s.onrender.com/", payload);
             setShortUrl(res.data.shortUrl)
             setErr(false)
             
@@ -88,3 +88,6 @@ const UrlShortener = ()=>{
 
 
 export {UrlShortener}
+
+
+//https://urlshortner-cv4s.onrender.com

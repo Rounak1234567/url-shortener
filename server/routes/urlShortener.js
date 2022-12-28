@@ -25,7 +25,7 @@ router.post("/", async (req, res)=>{
         if (url) {
           return res.json(url);
         } else {
-          const shortUrl = "http://alturl.herokuapp.com/short" + '/' + urlCode;
+          const shortUrl = "https://urlshortner-cv4s.onrender.com/short" + '/' + urlCode;
   
           url = new Url({
             longUrl,
